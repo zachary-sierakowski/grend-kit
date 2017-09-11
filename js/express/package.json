@@ -1,0 +1,16 @@
+{
+  "name": "express",
+  "version": "0.1.0",
+  "description": "A simple express server",
+  "author": "Zachary Sierakowski",
+  "license": "UNLICENSED",
+  "scripts": {
+    "prestart": "yarn",
+    "start": "node ./src"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "nodemailer": "^4.0.1"
+  }
+}

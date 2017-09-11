@@ -1,0 +1,3 @@
+--- 
+# The default host binds to all local interfaces.
+addr: ":6040"

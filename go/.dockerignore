@@ -1,0 +1,6 @@
+# exlude all
+*
+
+# include target directory
+!bin/*
+!config/*

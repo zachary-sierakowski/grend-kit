@@ -1,0 +1,21 @@
+version: '2'
+services:
+  grend-service:
+      image: grend-service
+      ports:
+        - "6040:6040"
+  grend-nginx:
+    image: grend-nginx
+    links:
+        - grend-ui-1:ui-1
+        - grend-ui-2:ui-2
+    ports:
+        - "80:80"
+  grend-ui-1:
+      image: grend-ui
+      ports:
+        - "8080"
+  grend-ui-2:
+      image: grend-ui
+      ports:
+        - "8080"

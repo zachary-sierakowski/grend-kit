@@ -1,0 +1,9 @@
+# This file dictates what files will be sent as a context to the docker
+# daemon when building a container.
+
+# exclude everything by default
+*
+
+# include only the directories used by the dockerfile
+!react/dist/*
+!express/*
