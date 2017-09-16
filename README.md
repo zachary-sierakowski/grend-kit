@@ -32,14 +32,12 @@ The UI image is built with react's latest version v16. The ui makes a request to
 
 ### E - Express Server
 
-The express server is setup to serve up the react application on the root path (`/`). Requests to `/contact` use [nodemailer](https://github.com/nodemailer/nodemailer) to build and send emails. The body of the request should be JSON in the following format:
+The express server is setup to serve up the react application on the root path (`/`). POST requests to `/mail` use [nodemailer](https://github.com/nodemailer/nodemailer) to build and send emails. The body of the request should be JSON in the following format:
 
 ```
 {
   subject: "", 
-  name: "", 
-  email: "", 
-  phone: ""
+  name: ""
 }
 ```
 

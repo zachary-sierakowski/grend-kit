@@ -93,9 +93,10 @@ if (isProduction) {
   // Production rules
   rules.push({
     test: /\.scss$/,
+    exclude: /node_modules/,
     loader: ExtractTextPlugin.extract({
       fallback: "style-loader",
-      use: "css-loader!postcss-loader"
+      use: "css-loader!sass-loader"
     })
   });
 } else {
@@ -106,7 +107,7 @@ if (isProduction) {
   rules.push({
     test: /\.scss$/,
     exclude: /node_modules/,
-    use: ["style-loader", "css-loader", "postcss-loader"]
+    use: ["style-loader", "css-loader", "sass-loader"]
   });
 }
 
@@ -123,13 +124,7 @@ module.exports = {
     rules
   },
   resolve: {
-    extensions: [
-      ".webpack-loader.js",
-      ".web-loader.js",
-      ".loader.js",
-      ".js",
-      ".jsx"
-    ],
+    extensions: [".js", ".jsx", ".scss"],
     modules: [path.resolve(__dirname, "node_modules"), jsSourcePath]
   },
   plugins,
@@ -141,6 +136,9 @@ module.exports = {
       "/service": {
         target: "http://localhost:6040",
         pathRewrite: { "^/service": "" }
+      },
+      "/mail": {
+        target: "http://localhost:80"
       }
     },
     compress: isProduction,

@@ -1,15 +1,19 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-
-import ErrorBoundary from "../ErrorBoundary";
+import { Menu } from "semantic-ui-react";
 
 class App extends PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <ErrorBoundary>
+      <div>
+        <Menu borderless fixed="top" inverted>
+          <Menu.Item>
+            HELLO GREND
+          </Menu.Item>
+        </Menu>
         {children}
-      </ErrorBoundary>
+      </div>
     );
   }
 }

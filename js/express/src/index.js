@@ -21,14 +21,12 @@ app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, DIST_PATH, "index.html"))
 );
 
-app.post("/contact", (req, res) => {
-  sendMail(req.body, response => {
-    if (!response.sent) {
-      console.error(response.msg);
-    } else {
-      console.log(response.msg);
+app.post("/mail", (req, res) => {
+  sendMail(req.body, (error, info) => {
+    if (error) {
+      console.error(error.response);
     }
-    res.send({ sent: response });
+    res.status(error ? 500 : 200).send({ error, info });
   });
 });
 

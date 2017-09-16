@@ -1,0 +1,15 @@
+/* import any variables */
+@import "variables";
+
+/* add the semantic ui css */
+@import "~semantic-ui-css/semantic.min.css";
+
+/* add container specific css */
+@import "../containers/Home/Home.scss";
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  background-color: $mine-shaft; 
+  color: white;
+}

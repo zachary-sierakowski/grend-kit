@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
+import { Grid, Menu } from "semantic-ui-react";
 
-import { Button } from "../../components";
+import ErrorBoundary from "../ErrorBoundary";
+
+import { ErrorExample, MailExample, ServiceExample } from "../../components";
 import { getServiceHealth } from "../../utils/requests";
 
 class Home extends PureComponent {
@@ -21,19 +24,28 @@ class Home extends PureComponent {
     }
   }
 
-  triggerError = () => {
-    this.setState(() => ({ error: "Triggered an error" }));
-  };
-
   render() {
     if (this.state.error) {
       throw Error(this.state.error);
     }
     return (
-      <div>
-        <p>React 16 helloworld</p>
-        <Button onClick={this.triggerError}>Trigger an error</Button>
-      </div>
+      <Grid columns={3} divided className="centered" inverted>
+        <Grid.Row>
+          <Grid.Column>
+            <ErrorBoundary>
+              <ErrorExample />
+            </ErrorBoundary>
+          </Grid.Column>
+          <Grid.Column>
+            <ErrorBoundary>
+              <MailExample />
+            </ErrorBoundary>
+          </Grid.Column>
+          <Grid.Column>
+            <ServiceExample />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

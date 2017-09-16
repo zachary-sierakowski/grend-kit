@@ -19,7 +19,7 @@ class ErrorBoundary extends PureComponent {
     if (this.state.hasError) {
       return (
         <div>
-          <h2>Something went wrong.</h2>
+          <h4>Something went wrong.</h4>
           <details style={{ whiteSpace: "pre-wrap" }}>
             {this.state.error && this.state.error.toString()}
             <br />

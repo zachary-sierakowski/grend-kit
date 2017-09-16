@@ -10,14 +10,12 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const buildEmail = (subject, name, email, phone) => ({
+const buildEmail = (subject, name) => ({
   to: MAIL_TO,
   from: MAIL_FROM,
   subject,
   text: `
-      Name: ${name}\r\n
-      Email: ${email}\r\n
-      Phone: ${phone}\r\n
+      Hello ${name}
     `,
   html: `
       <html>
@@ -25,38 +23,15 @@ const buildEmail = (subject, name, email, phone) => ({
           <title>Grend email</title>
         </head>
         <body>
-          <h3>Info</h3>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-            </tr>
-            <tr>
-              <td>${name}</td>
-              <td>${email}</td>
-              <td>${phone}</td>
-            </tr>
-          </table>
+          <p>Hello ${name}</p>
         </body>
       </html>
     `
 });
 
-const sendMail = (body, callBack) => {
-  const { subject, name, email, phone } = body; // fields in request json body
-  return transporter.sendMail(
-    buildEmail(subject, name, email, phone),
-    (error, info) => {
-      if (error) {
-        callBack({ sent: false, msg: error });
-      }
-      callBack({
-        sent: true,
-        msg: `Mail ${info.messageId} sent: ${info.response}`
-      });
-    }
-  );
+const sendMail = (body, expressCallback) => {
+  const { subject, name } = body; // fields in request json body
+  return transporter.sendMail(buildEmail(subject, name), expressCallback);
 };
 
 module.exports = {
