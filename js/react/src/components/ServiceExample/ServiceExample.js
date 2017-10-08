@@ -1,12 +1,16 @@
 import React, { PureComponent } from "react";
+import { Button } from "antd";
+
+import { sendServiceRequest } from "../../utils/requests";
 
 class ServiceExample extends PureComponent {
   render() {
-    return (
-      <div>
-        <h4>Grend Service Request Example</h4>
-      </div>
-    );
+    return [
+      <h4 key="serviceEx">Grend Service Request Example</h4>,
+      <Button key="serviceExBtn" onClick={sendServiceRequest}>
+        Send Health Request
+      </Button>
+    ];
   }
 }
 

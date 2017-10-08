@@ -2,10 +2,8 @@ const webpack = require("webpack");
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const autoprefixer = require("autoprefixer");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const nodeEnv = process.env.NODE_ENV || "development";
 const isProduction = nodeEnv === "production";
@@ -36,21 +34,9 @@ const plugins = [
     path: buildPath,
     filename: "index.html"
   }),
-  new webpack.LoaderOptionsPlugin({
-    options: {
-      postcss: [
-        autoprefixer({
-          browsers: ["last 3 version", "ie >= 10"]
-        })
-      ],
-      context: sourcePath
-    }
-  }),
   new CopyWebpackPlugin([
     { from: path.join(__dirname, "favicon.ico"), to: buildPath }
   ])
-  // add the bundle analyzer
-  //new BundleAnalyzerPlugin()
 ];
 
 // Common rules
@@ -62,7 +48,7 @@ const rules = [
   },
   {
     test: /\.(png|gif|jpg|svg|otf|eot|ttf|woff|woff2)$/,
-    include: [imgPath, path.resolve("node_modules", "semantic-ui-css/themes")],
+    include: [imgPath],
     use: "url-loader?limit=20480&name=assets/[name]-[hash].[ext]"
   }
 ];
@@ -86,35 +72,17 @@ if (isProduction) {
       output: {
         comments: false
       }
-    }),
-    new ExtractTextPlugin("style-[hash].css")
-  );
-
-  // Production rules
-  rules.push({
-    test: /\.scss$/,
-    exclude: /node_modules/,
-    loader: ExtractTextPlugin.extract({
-      fallback: "style-loader",
-      use: "css-loader!sass-loader"
     })
-  });
+  );
 } else {
   // Development plugins
   plugins.push(new webpack.HotModuleReplacementPlugin());
-
-  // Development rules
-  rules.push({
-    test: /\.scss$/,
-    exclude: /node_modules/,
-    use: ["style-loader", "css-loader", "sass-loader"]
-  });
 }
 
 module.exports = {
   devtool: isProduction ? false : "source-map",
   context: jsSourcePath,
-  entry: ["babel-polyfill", "./index.js"],
+  entry: ["babel-polyfill", "./render.js"],
   output: {
     path: buildPath,
     publicPath: "/",
@@ -124,7 +92,7 @@ module.exports = {
     rules
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss"],
+    extensions: [".js", ".jsx"],
     modules: [path.resolve(__dirname, "node_modules"), jsSourcePath]
   },
   plugins,

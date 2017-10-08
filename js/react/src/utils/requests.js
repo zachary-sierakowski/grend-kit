@@ -1,5 +1,3 @@
-import fetch from "isomorphic-fetch";
-
 const getFetchConfig = (method, body) => ({
   method,
   headers: {
@@ -9,11 +7,12 @@ const getFetchConfig = (method, body) => ({
   body
 });
 
-const handleJSONResponse = response => {
+const handleMailResponse = async response => {
+  const responseJSON = await response.json();
   if (!response.ok) {
-    throw Error("Request failed");
+    throw Error(responseJSON.error.response);
   }
-  return response.json();
+  return responseJSON;
 };
 
 const fetchHelper = promise => {
@@ -27,7 +26,10 @@ const fetchHelper = promise => {
 export const getServiceHealth = () =>
   fetch("/service/health", getFetchConfig("GET"));
 
+export const sendServiceRequest = () =>
+  fetchHelper(fetch("/service", getFetchConfig("GET")));
+
 export const sendMail = email =>
   fetchHelper(
-    fetch("/mail", getFetchConfig("POST", email)).then(handleJSONResponse)
+    fetch("/mail", getFetchConfig("POST", email)).then(handleMailResponse)
   );

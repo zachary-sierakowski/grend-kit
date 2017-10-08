@@ -11,22 +11,19 @@ class ErrorBoundary extends PureComponent {
   }
 
   componentDidCatch(error, info) {
-    // Display fallback UI
     this.setState({ hasError: true, error, errorInfo: info });
   }
   render() {
     const { children } = this.props;
     if (this.state.hasError) {
-      return (
-        <div>
-          <h4>Something went wrong.</h4>
-          <details style={{ whiteSpace: "pre-wrap" }}>
-            {this.state.error && this.state.error.toString()}
-            <br />
-            {this.state.errorInfo.componentStack}
-          </details>
-        </div>
-      );
+      return [
+        <h4 key="errorMsg">Something went wrong.</h4>,
+        <details key="errorDetails" style={{ whiteSpace: "pre-wrap" }}>
+          {this.state.error && this.state.error.toString()}
+          <br />
+          {this.state.errorInfo.componentStack}
+        </details>
+      ];
     }
     return children;
   }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A simple express server",
   "author": "Zachary Sierakowski",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prestart": "yarn",
     "start": "node ./src"

@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Button } from "semantic-ui-react";
+import { Button } from "antd";
 
 class ErrorExample extends PureComponent {
   constructor(props) {
@@ -18,12 +18,12 @@ class ErrorExample extends PureComponent {
     if (this.state.error) {
       throw Error(this.state.error);
     }
-    return (
-      <div>
-        <h4>React v16 Error Boundary Example</h4>
-        <Button onClick={this.triggerError}>Trigger an error</Button>
-      </div>
-    );
+    return [
+      <h4 key="boundaryEx">React v16 Error Boundary Example</h4>,
+      <Button key="boundaryExBtn" onClick={this.triggerError}>
+        Trigger an error
+      </Button>
+    ];
   }
 }
 

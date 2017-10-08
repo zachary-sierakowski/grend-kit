@@ -20,6 +20,10 @@ Run `docker-compose up -d` from the `./docker` directory to run all images toget
 
 To view the UI, navigate to [http://localhost:80](http://localhost:80).
 
+### Contributing
+
+See [CONTRIBUTING](./CONTRIBUTING.md)
+
 ---
 
 ### G - Golang Service
