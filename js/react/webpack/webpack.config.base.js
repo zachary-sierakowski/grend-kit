@@ -1,8 +1,6 @@
-const webpack = require("webpack");
 const path = require("path");
-
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const ROOT = path.resolve(__dirname, "../");
 const IMG_PATH = path.resolve(ROOT, "src/assets/img");

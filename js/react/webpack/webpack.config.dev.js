@@ -1,7 +1,7 @@
-const webpack = require("webpack");
 const path = require("path");
-
+const webpack = require("webpack");
 const baseConfig = require("./webpack.config.base");
+
 const ROOT = path.resolve(__dirname, "../");
 const HOST = "0.0.0.0";
 const PORT = 3000;
