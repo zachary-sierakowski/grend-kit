@@ -2,47 +2,10 @@ const webpack = require("webpack");
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const ENV = process.env.NODE_ENV || "development";
-const HOST = "0.0.0.0";
-const PORT = 3000;
 
 const ROOT = path.resolve(__dirname, "../");
 const IMG_PATH = path.resolve(ROOT, "src/assets/img");
-
-const devServer = {
-  contentBase: path.resolve(ROOT, "src"),
-  historyApiFallback: true,
-  host: HOST,
-  port: PORT,
-  proxy: [
-    {
-      context: "/service",
-      target: "http://localhost:6040",
-      pathRewrite: { "^/service": "" }
-    },
-    {
-      context: "/mail",
-      target: "http://localhost:80"
-    }
-  ],
-  stats: {
-    assets: true,
-    children: false,
-    chunks: false,
-    hash: false,
-    modules: false,
-    publicPath: false,
-    timings: true,
-    version: false,
-    warnings: true,
-    colors: {
-      green: "\u001b[32m"
-    }
-  }
-};
 
 module.exports = {
   entry: [
@@ -55,11 +18,10 @@ module.exports = {
     publicPath: "/",
     filename: "app-[hash].js"
   },
-  devtool: "source-map",
+  devtool: false,
   context: path.resolve(ROOT, "src"),
-  devServer,
   resolve: {
-    extensions: [".js"],
+    extensions: [".js", ".jsx"],
     modules: [path.resolve(ROOT, "node_modules")]
   },
   module: {
@@ -92,21 +54,14 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify(ENV)
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development")
       }
     }),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      template: path.resolve(ROOT, "../index.html"),
       path: path.resolve(ROOT, "dist"),
-      filename: "index.html"
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(ROOT, "favicon.ico"),
-        to: path.resolve(ROOT, "dist")
-      }
-    ]),
-    new webpack.HotModuleReplacementPlugin()
+      template: path.resolve(ROOT, "../index.html"),
+      favicon: path.resolve(ROOT, "favicon.ico")
+    })
   ]
 };
