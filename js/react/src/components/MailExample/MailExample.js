@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Input, Button } from "antd";
+import { Card, Input, Button } from "antd";
 
 import { sendMail } from "../../utils/requests";
 
@@ -33,9 +33,17 @@ class MailExample extends PureComponent {
     if (this.state.error) {
       throw Error(this.state.error);
     }
-    return [
-      <h4 key="mailEx">Grend Express Mail Example</h4>,
-      <div key="mailExDiv">
+
+    return (
+      <Card
+        title="Express Mail Example"
+        extra={
+          <Button disabled={!this.isSubmitReady()} onClick={this.sendEmail}>
+            Send Mail
+          </Button>
+        }
+        style={{ minHeight: "200px" }}
+      >
         <Input
           placeholder="Full name"
           onChange={e => {
@@ -55,11 +63,8 @@ class MailExample extends PureComponent {
             }));
           }}
         />
-        <Button disabled={!this.isSubmitReady()} onClick={this.sendEmail}>
-          Submit
-        </Button>
-      </div>
-    ];
+      </Card>
+    );
   }
 }
 

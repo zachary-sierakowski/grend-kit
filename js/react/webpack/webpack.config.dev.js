@@ -6,13 +6,13 @@ const ROOT = path.resolve(__dirname, "../");
 const HOST = "0.0.0.0";
 const PORT = 3000;
 
-// add hot module replacement
-baseConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 // add hot loader patch _after_ the polyfill (first index)
 baseConfig.entry.splice(1, 0, "react-hot-loader/patch");
-
 module.exports = Object.assign({}, baseConfig, {
   devtool: "source-map",
+  plugins: baseConfig.plugins.concat([
+    new webpack.HotModuleReplacementPlugin()
+  ]),
   devServer: {
     contentBase: path.resolve(ROOT, "src"),
     inline: true,

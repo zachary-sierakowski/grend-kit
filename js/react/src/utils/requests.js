@@ -24,7 +24,7 @@ const fetchHelper = promise => {
 };
 
 export const getServiceHealth = () =>
-  fetch("/service/health", getFetchConfig("GET"));
+  fetchHelper(fetch("/service/health", getFetchConfig("GET")));
 
 export const sendServiceRequest = () =>
   fetchHelper(fetch("/service", getFetchConfig("GET")));
