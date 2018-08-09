@@ -30,9 +30,9 @@ See [CONTRIBUTING](./CONTRIBUTING.md)
 
 The golang service is a simple server that handles one request to `/health`. This endpoint returns a "Service is running normally" string.
 
-### R - React v16
+### R - React UI
 
-The UI image is built with react's latest version v16. The ui makes a request to the go service `/health` and also has a Error boundary setup for an example error. Run `yarn start` from `./js/react` to serve up the app on [http://localhost:3000](http://localhost:3000).
+The UI image is built with React. The ui makes a request to the go service `/health` and also has a Error boundary setup for an example error. Run `yarn start` from `./js/react` to serve up the app on [http://localhost:3000](http://localhost:3000).
 
 ### E - Express Server
 
